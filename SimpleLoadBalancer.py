@@ -131,10 +131,10 @@ class SimpleLoadBalancer(object):
         actions = []
         # set the correct mac and port
         actions.append(of.ofp_action_dl_addr.set_dst(mac))
-        actions.append(of.ofp_action_output(port = port))
         # from the client's perspective, the packet should be from lb IP and MAC
         actions.append(of.ofp_action_dl_addr.set_src(self.lb_mac))
         actions.append(of.ofp_action_nw_addr.set_src(self.lb_ip))
+        actions.append(of.ofp_action_output(port = port))
         
         # send the message
         msg = of.ofp_packet_out()
